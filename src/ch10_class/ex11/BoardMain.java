@@ -24,9 +24,9 @@ public class BoardMain {
                 String writer = scanner.next();
                 System.out.print("내용> ");
                 String content = scanner.next();
-                System.out.print("조회수> ");
-                int hits = scanner.nextInt();
-                board = new Board(id,title,writer,content,hits);
+//                System.out.print("조회수> ");
+//                int hits = scanner.nextInt();
+                board = new Board(id,title,writer,content);
             } else if (select == 2) {
                 System.out.print("글번호> ");
                 idSearch = scanner.nextLong();

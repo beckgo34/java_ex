@@ -50,12 +50,11 @@ public class Board {
     public Board() {
     }
 
-    public Board(Long id, String boardTitle, String boardWriter, String boardContents, int boardHits) {
+    public Board(Long id, String boardTitle, String boardWriter, String boardContents) {
         this.id = id;
         this.boardTitle = boardTitle;
         this.boardWriter = boardWriter;
         this.boardContents = boardContents;
-        this.boardHits = boardHits;
     }
 
     @Override
@@ -65,11 +64,13 @@ public class Board {
                 ", boardTitle='" + boardTitle + '\'' +
                 ", boardWriter='" + boardWriter + '\'' +
                 ", boardContents='" + boardContents + '\'' +
-                ", boardHits=" + (boardHits+1) +
+                ", boardHits=" + boardHits +
                 '}';
     }
-    public void findByid(Long id){
-        if(id == getId()){
+
+    public void findByid(Long id) {
+        if (id.equals(getId())) {
+            boardHits = boardHits + 1;
             System.out.println(toString());
 
         }
