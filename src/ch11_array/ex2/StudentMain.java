@@ -27,7 +27,7 @@ public class StudentMain {
 
         //1번 인덱스에 담긴 객체의 학과만 출력
         System.out.println(studentList.get(1).getStudentMajor());
-        System.out.println(studentList.get(0).getStudentMobile());
+        System.out.println("0번인덱스 번호 "+studentList.get(0).getStudentMobile());
 
         //반복문
         for (int i = 0; i < studentList.size(); i++) {
@@ -35,10 +35,17 @@ public class StudentMain {
             //학생의 이름만 따로 출력
             System.out.println("studentList = " + studentList.get(i).getStudentName());
             System.out.println("studentList = " + studentList.get(i).getStudentMobile());
+
+
         }
         for(Student stu : studentList){
+            if (studentList.size() > 1){
+                Student stu1 = studentList.get(0);
+                System.out.println("stu1 = " + stu1);
+            }
             System.out.println("stu = " + stu);
             // 이름만
+            System.out.println("stu.getStudentName() = " + stu.getStudentName());
             System.out.println("stu.getStudentName() = " + stu.getStudentName());
         }
     }
