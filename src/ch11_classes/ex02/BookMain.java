@@ -27,7 +27,7 @@ public class BookMain {
             } else if (selectNo == 5) {
                 bookService.update();
             } else if (selectNo == 6) {
-                // 호출하는 문장 작성
+                bookService.delete();
             }  else if (selectNo == 6) {
                 bookService.search();
             } else if (selectNo == 7) {
