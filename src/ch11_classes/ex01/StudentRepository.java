@@ -25,4 +25,12 @@ public class StudentRepository {
         return studentDTOList.add(studentDTO);
 
     }
+
+    /**
+     * return type: List
+     * @return
+     */
+    public List<StudentDTO> method4(){
+        return  studentDTOList;
+    }
 }
