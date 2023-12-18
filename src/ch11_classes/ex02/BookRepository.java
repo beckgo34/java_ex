@@ -23,7 +23,6 @@ public class BookRepository {
         for (int i = 0; i < bookDTOList.size(); i++) {
             if (id.equals(bookDTOList.get(i).getId())) {
                 bookDTO = bookDTOList.get(i);
-                System.out.println(bookDTOList.get(i));
             }
         }
         return bookDTO;
