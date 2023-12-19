@@ -13,7 +13,7 @@ public class BoardMain {
             System.out.println("-------------------------------------------------------------------");
             System.out.println("1.글작성 | 2.글목록 | 3.글조회 | 4.글수정 | 5.글삭제 | 6.검색 | 7.종료 | ");
             System.out.println("-------------------------------------------------------------------");
-            System.out.println("선택: ");
+            System.out.print("선택: ");
             selectNo = scanner.nextInt();
             if (selectNo == 1) {
                 boardService.list();

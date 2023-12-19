@@ -5,23 +5,25 @@ import java.util.List;
 
 public class BoardRepository {
     List<BoardDTO> boardDTOList = new ArrayList<>();
+
     public boolean list(BoardDTO boardDTO) {
-            return boardDTOList.add(boardDTO);
+        return boardDTOList.add(boardDTO);
     }
 
     public void findAll() {
         for (int i = 0; i < boardDTOList.size(); i++) {
             System.out.print("글번호: " + boardDTOList.get(i).getId());
             System.out.print(" 글제목: " + boardDTOList.get(i).getBoardTitle());
-            System.out.println(" 글작성자: " + boardDTOList.get(i).getBoardWriter());
-            System.out.println(" 조회수: " + boardDTOList.get(i).getBoardCount());
+            System.out.print(" 글작성자: " + boardDTOList.get(i).getBoardWriter());
+            System.out.print(" 조회수: " + boardDTOList.get(i).getBoardCount());
+            System.out.println();
         }
     }
 
     public BoardDTO findBoard(Long id) {
         BoardDTO boardDTO = null;
         for (int i = 0; i < boardDTOList.size(); i++) {
-            if (id.equals(boardDTOList.get(i).getId())){
+            if (id.equals(boardDTOList.get(i).getId())) {
                 boardDTO = boardDTOList.get(i);
             }
         }
@@ -29,38 +31,52 @@ public class BoardRepository {
 
     }
 
-    public boolean update(Long id, String boardPass, String boardTitle, String boardContents) {
+
+    public boolean update(String boardTitle, String boardContents) {
         boolean result = false;
         for (int i = 0; i < boardDTOList.size(); i++) {
-            if(id.equals(boardDTOList.get(i).getId()) && boardPass.equals(boardDTOList.get(i).getBoardPass())){
-                boardDTOList.get(i).setBoardTitle(boardTitle);
-                boardDTOList.get(i).setBoardContents(boardContents);
+
+            boardDTOList.get(i).setBoardTitle(boardTitle);
+            boardDTOList.get(i).setBoardContents(boardContents);
+            result = true;
+
+        }
+        return result;
+    }
+
+    public boolean check(Long id, String boardPass) {
+        boolean result = false;
+        for (int i = 0; i < boardDTOList.size(); i++) {
+            if (id.equals(boardDTOList.get(i).getId()) && boardPass.equals(boardDTOList.get(i).getBoardPass())) {
                 result = true;
+
             }
         }
-            return result;
-
+        return result;
     }
+
+
+
 
     public boolean delete(Long id, String boardPass) {
         boolean result = false;
         for (int i = 0; i < boardDTOList.size(); i++) {
-            if(id.equals(boardDTOList.get(i).getId()) && boardPass.equals(boardDTOList.get(i).getBoardPass())){
+            if (id.equals(boardDTOList.get(i).getId()) && boardPass.equals(boardDTOList.get(i).getBoardPass())) {
                 boardDTOList.remove(i);
                 result = true;
             }
         }
-            return result;
+        return result;
     }
 
     public List<BoardDTO> search(String boardTitle) {
         List<BoardDTO> boardDTOS = new ArrayList<>();
         for (int i = 0; i < boardDTOList.size(); i++) {
-            if (boardDTOList.get(i).getBoardTitle().contains(boardTitle)){
+            if (boardDTOList.get(i).getBoardTitle().contains(boardTitle)) {
                 BoardDTO boardDTO = boardDTOList.get(i);
                 boardDTOS.add(boardDTO);
             }
-            
+
         }
         return boardDTOS;
     }

@@ -35,7 +35,7 @@ public class BoardService {
         BoardDTO boardDTO = boardRepository.findBoard(id);
         boardDTO.findBoard(id);
         if (boardDTO != null){
-            System.out.println("boardDTO = " + boardDTO +boardDTO.getBoardCount());
+            System.out.println("boardDTO = "+boardDTO);
         }else{
             System.out.println("조회결과 없음");
         }
@@ -48,13 +48,13 @@ public class BoardService {
         Long id = scanner.nextLong();;
         System.out.print("비밀번호: ");
         String boardPass = scanner.next();;
-        boolean resultBoard =boardRepository.update(id, boardPass, boardTitle, boardContents);
+        boolean resultBoard =boardRepository.check(id, boardPass);
         if (resultBoard){
             System.out.print("제목: ");
             boardTitle = scanner.next();;
             System.out.print("내용: ");
             boardContents = scanner.next();
-            boolean result = boardRepository.update(id, boardPass, boardTitle,boardContents);
+            boolean result = boardRepository.update(boardTitle,boardContents);
         }else {
             System.out.print("비밀번호 틀림");
         }
@@ -68,7 +68,9 @@ public class BoardService {
         String  boardPass = scanner.next();
         boolean result = boardRepository.delete(id, boardPass);
         if (result){
-            System.out.print("글이 삭제됨");
+            System.out.println("글이 삭제됨");
+        }else {
+            System.out.println("삭제실패");
         }
     }
 
