@@ -16,6 +16,7 @@ public class BoardRepository {
             System.out.print(" 글제목: " + boardDTOList.get(i).getBoardTitle());
             System.out.print(" 글작성자: " + boardDTOList.get(i).getBoardWriter());
             System.out.print(" 조회수: " + boardDTOList.get(i).getBoardCount());
+            System.out.print(" 시간: " + boardDTOList.get(i).getCreatedAt());
             System.out.println();
         }
     }
@@ -35,11 +36,9 @@ public class BoardRepository {
     public boolean update(String boardTitle, String boardContents) {
         boolean result = false;
         for (int i = 0; i < boardDTOList.size(); i++) {
-
             boardDTOList.get(i).setBoardTitle(boardTitle);
             boardDTOList.get(i).setBoardContents(boardContents);
             result = true;
-
         }
         return result;
     }

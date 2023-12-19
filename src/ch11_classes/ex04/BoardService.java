@@ -32,6 +32,8 @@ public class BoardService {
     public void findBoard() {
         System.out.print("글번호 입력: ");
         Long id = scanner.nextLong();
+        // 1. 조회수를1 증가
+        // 2. 상세내용 가져옴
         BoardDTO boardDTO = boardRepository.findBoard(id);
         boardDTO.findBoard(id);
         if (boardDTO != null){
@@ -42,8 +44,6 @@ public class BoardService {
     }
 
     public void update() {
-        String boardTitle = null;
-        String boardContents = null;
         System.out.print("글번호 입력: ");
         Long id = scanner.nextLong();;
         System.out.print("비밀번호: ");
@@ -51,9 +51,9 @@ public class BoardService {
         boolean resultBoard =boardRepository.check(id, boardPass);
         if (resultBoard){
             System.out.print("제목: ");
-            boardTitle = scanner.next();;
+            String boardTitle = scanner.next();;
             System.out.print("내용: ");
-            boardContents = scanner.next();
+            String boardContents = scanner.next();
             boolean result = boardRepository.update(boardTitle,boardContents);
         }else {
             System.out.print("비밀번호 틀림");
