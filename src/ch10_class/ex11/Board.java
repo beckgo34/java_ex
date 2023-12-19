@@ -73,6 +73,7 @@ public class Board {
             boardHits = boardHits + 1;
             System.out.println(toString());
             System.out.println();
+
         }
     }
 }

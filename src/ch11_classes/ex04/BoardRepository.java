@@ -26,6 +26,7 @@ public class BoardRepository {
             }
         }
         return boardDTO;
+
     }
 
     public boolean update(Long id, String boardPass, String boardTitle, String boardContents) {

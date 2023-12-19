@@ -82,6 +82,7 @@ public class BoardService {
         }
         }else {
                 System.out.println("검색결과 없음");
+
             }
 
     }

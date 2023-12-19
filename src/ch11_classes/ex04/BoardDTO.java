@@ -86,6 +86,7 @@ public class BoardDTO {
         if (id.equals(getId())){
             boardCount = boardCount+1;
             System.out.println(toString());
+
         }
     }
 }

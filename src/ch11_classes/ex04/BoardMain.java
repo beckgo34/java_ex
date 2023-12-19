@@ -31,5 +31,6 @@ public class BoardMain {
                 run = false;
             }
         }
+
     }
 }
