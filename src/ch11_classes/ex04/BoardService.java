@@ -88,4 +88,17 @@ public class BoardService {
             }
 
     }
+
+    //목록 출력 전용 메서드
+    // findAll, search 메서드로 부터 list 데이터를 전달 받아서 출력을 하는 메서드
+    private void listPrint(List<BoardDTO> boardDTOList){
+
+    }
+
+    public void testData() {
+        for (int i = 1; i < 11; i++) {
+            BoardDTO boardDTO = new BoardDTO("title" + i, "writer" + i, "1234", "contents" + i );
+            boardRepository.list(boardDTO);
+        }
+    }
 }
