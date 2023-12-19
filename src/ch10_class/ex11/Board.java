@@ -72,7 +72,7 @@ public class Board {
         if (id.equals(getId())) {
             boardHits = boardHits + 1;
             System.out.println(toString());
-
+            System.out.println();
         }
     }
 }
