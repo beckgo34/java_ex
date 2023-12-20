@@ -5,10 +5,10 @@ import java.time.format.DateTimeFormatter;
 
 public class AccountDTO {
     private Long id;
-    private String accountNumber;// 계좌번호
-    private long deposit;// 입금액
-    private long withdraw;// 출금액
-    private String bankingAt;// 입출금 발생 시간
+    private String accountNumber;
+    private long deposit;
+    private long withdraw;
+    private String bankingAt;
 
     public Long getId() {
         return id;
@@ -50,16 +50,17 @@ public class AccountDTO {
         this.bankingAt = bankingAt;
     }
 
+    private static Long idValue = 1L;
+
     public AccountDTO() {
     }
 
-    private static Long idValue = 1L;
     public AccountDTO(String accountNumber, long deposit, long withdraw) {
         this.id = idValue++;
         this.accountNumber = accountNumber;
         this.deposit = deposit;
         this.withdraw = withdraw;
-        this.bankingAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-DD HH:mm:ss"));
+        this.bankingAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
     @Override
