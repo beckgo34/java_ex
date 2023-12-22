@@ -50,7 +50,7 @@ public class MainController {
                     } else if (selectNoBoard == 4) {
                         boardService.boardUpdate();
                     } else if (selectNoBoard == 5) {
-
+                        boardService.boardDelete();
                     } else if (selectNoBoard == 6) {
                         boardService.boardSearch();
                     } else if (selectNoBoard == 0) {

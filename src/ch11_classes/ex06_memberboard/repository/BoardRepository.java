@@ -44,4 +44,15 @@ public class BoardRepository {
         }
         return null;
     }
+
+    public boolean boardDelete(Long id) {
+        boolean result = false;
+        for (int i = 0; i < boardDTOList.size(); i++) {
+            if (id.equals(boardDTOList.get(i).getId())){
+                boardDTOList.remove(i);
+                result = true;
+            }
+        }
+        return result;
+    }
 }

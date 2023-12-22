@@ -80,5 +80,16 @@ public class BoardService {
             System.out.println("조회한 id 게시물 없음");
         }
     }
+
+    public void boardDelete() {
+        System.out.println("삭제할 id: ");
+        Long id = scanner.nextLong();
+        boolean result = boardRepository.boardDelete(id);
+        if(result){
+            System.out.println("삭제성공");
+        }else {
+            System.out.println("삭제실패");
+        }
+    }
 }
 
