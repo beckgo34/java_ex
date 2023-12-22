@@ -55,4 +55,16 @@ public class BoardRepository {
         }
         return result;
     }
+
+    public boolean updateHits(Long id) {
+        for (int i = 0; i < boardDTOList.size(); i++) {
+            if (id.equals(boardDTOList.get(i).getId())){
+                int hits = boardDTOList.get(i).getBoardHits();
+                hits = hits + 1;
+                boardDTOList.get(i).setBoardHits(hits);
+                return true;
+            }
+        }
+        return false;
+    }
 }

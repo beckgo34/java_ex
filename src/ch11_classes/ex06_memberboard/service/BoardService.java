@@ -22,6 +22,7 @@ public class BoardService {
             BoardDTO boardDTO = new BoardDTO(boardTitle, boardContents);
             boolean result = boardRepository.boardWrite(boardDTO);
             if (result) {
+                boardDTO.setBoardWriter(CommonVariables.loginEmail);
                 System.out.println("글작성 완료");
             } else {
                 System.out.println("글작성 실패");
@@ -71,24 +72,29 @@ public class BoardService {
     }
 
     public void boardFind() {
-        System.out.println("조회할 id: ");
-        Long id = scanner.nextLong();
-        BoardDTO boardDTO = boardRepository.boardFind(id);
-        if (boardDTO != null){
-            System.out.println(boardDTO);
-        }else {
-            System.out.println("조회한 id 게시물 없음");
+        if (CommonVariables.loginEmail != null) {
+            System.out.println("조회할 id: ");
+            Long id = scanner.nextLong();
+            boolean result = boardRepository.updateHits(id);
+            if (result) {
+                BoardDTO boardDTO = boardRepository.boardFind(id);
+                System.out.println("boardDTO = " + boardDTO);
+            } else {
+                System.out.println("조회한 id 게시물 없음");
+            }
         }
     }
 
     public void boardDelete() {
-        System.out.println("삭제할 id: ");
-        Long id = scanner.nextLong();
-        boolean result = boardRepository.boardDelete(id);
-        if(result){
-            System.out.println("삭제성공");
-        }else {
-            System.out.println("삭제실패");
+        if (CommonVariables.loginEmail != null) {
+            System.out.println("삭제할 id: ");
+            Long id = scanner.nextLong();
+            boolean result = boardRepository.boardDelete(id);
+            if (result) {
+                System.out.println("삭제성공");
+            } else {
+                System.out.println("삭제실패");
+            }
         }
     }
 }

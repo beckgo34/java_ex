@@ -8,7 +8,7 @@ public class BoardDTO {
     private String boardTitle;
     private String boardWriter;
     private String boardContents;
-    private String boardHits;
+    private int boardHits;
     private String createdAt;
 
     public Long getId() {
@@ -43,11 +43,11 @@ public class BoardDTO {
         this.boardContents = boardContents;
     }
 
-    public String getBoardHits() {
+    public int getBoardHits() {
         return boardHits;
     }
 
-    public void setBoardHits(String boardHits) {
+    public void setBoardHits(int boardHits) {
         this.boardHits = boardHits;
     }
 
