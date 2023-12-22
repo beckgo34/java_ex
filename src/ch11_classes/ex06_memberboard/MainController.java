@@ -45,9 +45,15 @@ public class MainController {
                         boardService.boardWrite();
                     } else if (selectNoBoard == 2) {
                         boardService.boardList();
-                    } else if (selectNoBoard == 3){
+                    } else if (selectNoBoard == 3) {
+                        boardService.boardFind();
+                    } else if (selectNoBoard == 4) {
+                        boardService.boardUpdate();
+                    } else if (selectNoBoard == 5) {
+
+                    } else if (selectNoBoard == 6) {
                         boardService.boardSearch();
-                    } else if (selectNo == 0) {
+                    } else if (selectNoBoard == 0) {
                         run = false;
                     }
                 } else {

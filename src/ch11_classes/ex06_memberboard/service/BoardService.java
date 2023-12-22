@@ -30,18 +30,54 @@ public class BoardService {
     }
 
     public void boardList() {
-        List<BoardDTO> boardDTOList = boardRepository.boardList();
-        for (BoardDTO boardDTO : boardDTOList) {
-            System.out.println("boardDTO = " + boardDTO);;
+        if (CommonVariables.loginEmail != null) {
+            List<BoardDTO> boardDTOList = boardRepository.boardList();
+            for (BoardDTO boardDTO : boardDTOList) {
+                System.out.println("boardDTO = " + boardDTO);
+                ;
+            }
         }
     }
 
     public void boardSearch() {
-        System.out.println("검색어: ");
-        String q = scanner.next();
-        List<BoardDTO> boardSearch = boardRepository.boardSearch(q);
-        if (boardSearch > 0){
-            System.out.println(boardSearch);
+        if (CommonVariables.loginEmail != null) {
+            System.out.println("검색어: ");
+            String q = scanner.next();
+            List<BoardDTO> boardSearch = boardRepository.boardSearch(q);
+            if (boardSearch.size() > 0) {
+                System.out.println("검색결과");
+                System.out.println("boardSearch = " + boardSearch);
+            } else {
+                System.out.println("결과가 없음");
+            }
+        }
+    }
+
+
+    public void boardUpdate() {
+        if (CommonVariables.loginEmail != null) {
+            System.out.println("수정할 제목: ");
+            String boardTitle = scanner.next();
+            System.out.println("수정할 내용: ");
+            String boardContents = scanner.next();
+            boolean result = boardRepository.boardUpdate(boardTitle, boardContents);
+            if(result){
+                System.out.println("수정 성공");
+            }else {
+                System.out.println("수정 실패");
+            }
+
+        }
+    }
+
+    public void boardFind() {
+        System.out.println("조회할 id: ");
+        Long id = scanner.nextLong();
+        BoardDTO boardDTO = boardRepository.boardFind(id);
+        if (boardDTO != null){
+            System.out.println(boardDTO);
+        }else {
+            System.out.println("조회한 id 게시물 없음");
         }
     }
 }
