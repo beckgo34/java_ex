@@ -26,11 +26,11 @@ public class MemberService {
                 System.out.println("이미 등록된 이메일입니다");
             }
         } while (!checkResult);
-        System.out.println("비밀번호: ");
+        System.out.print("비밀번호: ");
         String memberPassword = scanner.next();
-        System.out.println("이름: ");
+        System.out.print("이름: ");
         String memberName = scanner.next();
-        System.out.println("전화번호: ");
+        System.out.print("전화번호: ");
         String memberMobile = scanner.next();
         MemberDTO memberDTO = new MemberDTO(memberEmail, memberPassword, memberName, memberMobile);
         boolean result = memberRepository.sava(memberDTO);
@@ -42,9 +42,9 @@ public class MemberService {
     }
 
     public void login() {
-        System.out.println("이메일: ");
+        System.out.print("이메일: ");
         String memberEmail = scanner.next();
-        System.out.println("비밀번호: ");
+        System.out.print("비밀번호: ");
         String memberPassword = scanner.next();
         MemberDTO memberDTO = memberRepository.login(memberEmail, memberPassword);
         if (memberDTO != null) {
@@ -62,9 +62,9 @@ public class MemberService {
 
     public void update() {
         if(CommonVariables.loginEmail != null){
-            System.out.println("비밀번호: ");
+            System.out.print("비밀번호: ");
             String memberPassword = scanner.next();
-            System.out.println("전화번호 입력: ");
+            System.out.print("전화번호 입력: ");
             String memberMobile = scanner.next();
             MemberDTO memberDTO = memberRepository.update(memberPassword,memberMobile);
             if (memberDTO != null) {
@@ -72,12 +72,14 @@ public class MemberService {
             } else {
                 System.out.println("수정실패");
             }
+        }else {
+            System.out.println("로그인이 필요합니다");
         }
     }
 
     public void delete() {
         if (CommonVariables.loginEmail != null) {
-            System.out.println("비밀번호 입력: ");
+            System.out.print("비밀번호 입력: ");
             String memberPassword = scanner.next();
             boolean result = memberRepository.delete(memberPassword);
             if (result) {
@@ -85,6 +87,8 @@ public class MemberService {
             } else {
                 System.out.println("회원탈퇴 실패");
             }
+        }else {
+            System.out.println("로그인이 필요합니다");
         }
     }
 

@@ -55,8 +55,10 @@ public class MainController {
                             boardService.boardDelete();
                         } else if (selectNoBoard == 6) {
                             boardService.boardSearch();
-                        } else if (selectNoBoard == 0) {
-                           runBoard = false;
+                        } else if (selectNoBoard == 99) {
+                            boardService.commentList();
+                        }else if(selectNoBoard == 0){
+                            runBoard = false;
                         }
                     }
                 } else {

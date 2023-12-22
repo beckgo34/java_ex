@@ -53,7 +53,7 @@ public class CommentDTO {
     public CommentDTO() {
     }
     public static Long idValue = 1l;
-    public CommentDTO(Long id, String boardId, String commentWriter, String commentContents, String createdAt) {
+    public CommentDTO(String commentContents) {
         this.id = idValue++;
         this.boardId = boardId;
         this.commentWriter = commentWriter;
@@ -65,7 +65,6 @@ public class CommentDTO {
     public String toString() {
         return "CommentDTO{" +
                 "id=" + id +
-                ", boardId='" + boardId + '\'' +
                 ", commentWriter='" + commentWriter + '\'' +
                 ", commentContents='" + commentContents + '\'' +
                 ", createdAt='" + createdAt + '\'' +
