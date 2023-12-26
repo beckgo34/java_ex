@@ -55,9 +55,7 @@ public class MainController {
                             boardService.boardDelete();
                         } else if (selectNoBoard == 6) {
                             boardService.boardSearch();
-                        } else if (selectNoBoard == 99) {
-                            boardService.commentList();
-                        }else if(selectNoBoard == 0){
+                        } else if (selectNoBoard == 0) {
                             runBoard = false;
                         }
                     }
@@ -65,7 +63,7 @@ public class MainController {
                     System.out.println("로그인이 필요한 서비스입니다");
                 }
             } else if (selectNo == 0) {
-                run =false;
+                run = false;
             }
         }
     }

@@ -1,5 +1,6 @@
 package ch13_map;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +25,19 @@ public class Ex01_MapBasic {
             System.out.println("i = " + i);
             System.out.println(map1.get(i));
         }
+
+        // key: String, value: String
+        Map<String, String> map2 = new HashMap<>();
+        map2.put("가", "안녕");
+        map2.put("나", "ㅎㅎㅎ");
+        map2.put("a", "ㅋㅋㅋ");
+        System.out.println(map2.get("a"));
+        //반복문
+        for (String s : map2.keySet()){
+            System.out.println("s = " + s);
+            System.out.println(map2.get(s));
         }
+
     }
+}
 
