@@ -1,50 +1,55 @@
-package ch13_map.ex03;
+package ch15_interface.ex02;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class MemberRepository {
+public class MemberRepositoryMap implements MemberRepository {
+
     private static Map<Long, MemberDTO> memberDTOMap = new HashMap<>();
 
-    public boolean sava(MemberDTO memberDTO) {
-        MemberDTO memberDTO1 = memberDTOMap.put(memberDTO.getId(), memberDTO);
-        if (memberDTO1 == null) {
+    @Override
+    public boolean save(MemberDTO memberDTO) {
+        MemberDTO dto = memberDTOMap.put(memberDTO.getId(), memberDTO);
+        if (dto == null) {
             return true;
         } else {
             return false;
         }
-
     }
 
+    public Map<Long, MemberDTO> findAll() {
+        return memberDTOMap;
+    }
+
+    @Override
     public MemberDTO login(String memberEmail, String memberPassword) {
         for (Long i : memberDTOMap.keySet()) {
-            if (memberEmail.equals(memberDTOMap.get(i).getMemberEmail()) && memberPassword.equals(memberDTOMap.get(i).getMemberEmail())) {
+            if (memberEmail.equals(memberDTOMap.get(i).getMemberEmail()) &&
+                    memberPassword.equals(memberDTOMap.get(i).getMemberPassword())) {
                 return memberDTOMap.get(i);
             }
         }
         return null;
     }
 
-    public Map<Long,MemberDTO> findAll() {
-        return memberDTOMap;
-            }
 
 
-    public boolean update(String loginEmail, String memberMobile) {
+
+    @Override
+    public boolean update(String loginEmail, String mobile) {
         for (Long i : memberDTOMap.keySet()) {
             if (loginEmail.equals(memberDTOMap.get(i).getMemberEmail())) {
-                memberDTOMap.get(i).setMemberMobile(memberMobile);
+                memberDTOMap.get(i).setMemberMobile(mobile);
                 return true;
             }
         }
         return false;
     }
 
-    public boolean memberDelete(String loinEmail) {
+    @Override
+    public boolean delete(String loginEmail) {
         for (Long i : memberDTOMap.keySet()) {
-            if (loinEmail.equals(memberDTOMap.get(i).getMemberEmail())) {
+            if (loginEmail.equals(memberDTOMap.get(i).getMemberEmail())) {
                 memberDTOMap.remove(i);
                 return true;
             }
@@ -52,6 +57,9 @@ public class MemberRepository {
         return false;
     }
 
+
+
+    @Override
     public boolean emailCheck(String memberEmail) {
         for (Long i : memberDTOMap.keySet()) {
             if (memberEmail.equals(memberDTOMap.get(i).getMemberEmail())) {

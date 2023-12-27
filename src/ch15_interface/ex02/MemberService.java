@@ -1,13 +1,16 @@
-package ch13_map.ex03;
+package ch15_interface.ex02;
 
 import java.util.Scanner;
 
 public class MemberService {
-    MemberRepository memberRepository = new MemberRepository();
+    //List를 사용하는 경우
+//    MemberRepositoryList memberRepository = new MemberRepositoryList();
+    //Map를 사용하는 경우
+    MemberRepository memberRepository = new MemberRepositoryMap();
     Scanner scanner = new Scanner(System.in);
     private static String loginEmail = null;
 
-    public void join() {
+    public void sava() {
         // 중복체크 결과를 담을 변수
         boolean checkResult = false;
         String memberEmail = null;
@@ -32,7 +35,7 @@ public class MemberService {
         String memberMobile = scanner.next();
 
         MemberDTO memberDTO = new MemberDTO(memberEmail, memberPassword, memberName, memberMobile);
-        boolean result = memberRepository.sava(memberDTO);
+        boolean result = memberRepository.save(memberDTO);
         if (result) {
             System.out.println("회원등록이 되었습니다.");
         } else {
@@ -59,7 +62,7 @@ public class MemberService {
         if (loginEmail != null) {
             System.out.println("수정할 전화번호: ");
             String memberMobile = scanner.next();
-            boolean updateResult = memberRepository.update(loginEmail,memberMobile);
+            boolean updateResult = memberRepository.update(loginEmail, memberMobile);
             if (updateResult) {
                 System.out.println("수정성공");
             } else {
@@ -77,7 +80,7 @@ public class MemberService {
 //            boolean result = memberRepository.memberDelete(memberPassword);
             MemberDTO memberDTO = memberRepository.login(loginEmail, memberPassword);
             if (memberDTO != null) {
-                boolean result = memberRepository.memberDelete(loginEmail);
+                boolean result = memberRepository.delete(loginEmail);
                 if (result) {
                     System.out.println("회원탈퇴 완료");
                 } else {
