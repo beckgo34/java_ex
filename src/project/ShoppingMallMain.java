@@ -1,6 +1,7 @@
 package project;
 
 import project.common.CommonVariables;
+import project.service.AdminService;
 import project.service.MemberService;
 import project.service.ProductPurchaseService;
 
@@ -11,6 +12,7 @@ public class ShoppingMallMain {
         Scanner scanner = new Scanner(System.in);
         ProductPurchaseService productPurchaseService = new ProductPurchaseService();
         MemberService memberService = new MemberService();
+        AdminService adminService = new AdminService();
         boolean run = true;
         int selectNo = 0;
 
@@ -22,10 +24,11 @@ public class ShoppingMallMain {
             System.out.print("선택: ");
             selectNo = scanner.nextInt();
             if (selectNo == 1) {
-
                 boolean runLogin = true;
                 while (runLogin) {
+                    System.out.println("-----------------------------------------------");
                     System.out.println("1.일반회원 로그인 | 2.판매자회원 로그인 | 3.뒤로가기");
+                    System.out.println("-----------------------------------------------");
                     System.out.println("선택: ");
                     int selcetLogin = scanner.nextInt();
                     if (selcetLogin == 1) {
@@ -55,7 +58,7 @@ public class ShoppingMallMain {
                                 System.out.println("1.재품등록 | 2.재품수량 | 3.판매금액 | 4.뒤로가기");
                                 int selectSeller = scanner.nextInt();
                                 if (selectSeller == 1) {
-
+                                    adminService.goodsSave();
                                 } else if (selectSeller == 2) {
 
                                 } else if (selectSeller == 3) {
@@ -79,6 +82,13 @@ public class ShoppingMallMain {
                 memberService.find();
             } else if (selectNo == 5) {
                 memberService.delete();
+            } else if (selectNo == 6) {
+                CommonVariables.loginEmail = null;
+                System.out.println("로그아웃 되었습니다");
+            } else if (selectNo == 7) {
+                System.out.println("프로그램 종료");
+            }else {
+                System.out.println("번호를 확인해주세요");
             }
         }
     }

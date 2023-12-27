@@ -1,16 +1,17 @@
 package project.dto;
 
 public class GoodsDTO {
-    private int productId;
+    private Long productId;
     private String productName;
     private Long price;
     private int quantity;
 
-    public int getProductId() {
+
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
@@ -41,10 +42,22 @@ public class GoodsDTO {
     public GoodsDTO() {
     }
 
-    public GoodsDTO(int productId, String productName, Long price, int quantity) {
-        this.productId = productId;
+    public static Long productIdValue = 1L;
+
+    public GoodsDTO(String productName, Long price, int quantity) {
+        this.productId = productIdValue;
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "GoodsDTO{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
     }
 }
