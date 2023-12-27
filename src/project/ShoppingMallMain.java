@@ -55,12 +55,12 @@ public class ShoppingMallMain {
                         boolean runSeller = true;
                         if (CommonVariables.loginAdminEmail != null) {
                             while (runSeller) {
-                                System.out.println("1.재품등록 | 2.재품수량 | 3.판매금액 | 4.뒤로가기");
+                                System.out.println("1.재품등록 | 2.재품목록 | 3.판매금액 | 4.뒤로가기");
                                 int selectSeller = scanner.nextInt();
                                 if (selectSeller == 1) {
                                     adminService.goodsSave();
                                 } else if (selectSeller == 2) {
-
+//                                    adminService.list();
                                 } else if (selectSeller == 3) {
 
                                 } else if (selectSeller == 4)
@@ -87,6 +87,7 @@ public class ShoppingMallMain {
                 System.out.println("로그아웃 되었습니다");
             } else if (selectNo == 7) {
                 System.out.println("프로그램 종료");
+                run = false;
             }else {
                 System.out.println("번호를 확인해주세요");
             }

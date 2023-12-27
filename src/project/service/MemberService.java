@@ -75,8 +75,6 @@ public class MemberService {
             MemberDTO memberDTO = memberRepository.find(memeberPass);
             if (memberDTO != null){
                 System.out.println(memberDTO);
-            }else {
-
             }
         }
     }

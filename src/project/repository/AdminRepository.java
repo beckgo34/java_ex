@@ -3,11 +3,14 @@ package project.repository;
 import project.dto.AdminDTO;
 import project.dto.GoodsDTO;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AdminRepository {
     public static Map<Long, GoodsDTO> adminDTOMap = new HashMap<>();
+    public static List<AdminDTO> adminDTOList = new ArrayList<>();
 
     public boolean goodsSave(GoodsDTO goodsDTO) {
         GoodsDTO goodsDTO1 = adminDTOMap.put(goodsDTO.getProductId(), goodsDTO);
@@ -17,4 +20,13 @@ public class AdminRepository {
             return false;
         }
     }
+
+
+//    public GoodsDTO list(String memberPass) {
+//        for (int i = 0; i < adminDTOList.size(); i++) {
+//            if (memberPass.equals(adminDTOList.get(i).getAdminPass())) {
+//                return adminDTOMap;
+//            }
+//        }
+//    }
 }
