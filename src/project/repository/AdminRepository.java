@@ -21,12 +21,21 @@ public class AdminRepository {
         }
     }
 
+    public AdminDTO login(String adminEmail, String adminPass) {
+        AdminDTO adminDTO = new AdminDTO();
+        if(adminEmail.equals(adminDTO.getAdminEmail()) && adminPass.equals(adminDTO.getAdminPass())){
+            return adminDTO;
+        }
+        return null;
+    }
 
-//    public GoodsDTO list(String memberPass) {
-//        for (int i = 0; i < adminDTOList.size(); i++) {
-//            if (memberPass.equals(adminDTOList.get(i).getAdminPass())) {
-//                return adminDTOMap;
-//            }
-//        }
-//    }
+
+    public GoodsDTO list(String memberPass) {
+        for (int i = 0; i < adminDTOList.size(); i++) {
+            if (memberPass.equals(adminDTOList.get(i).getAdminPass())) {
+                return adminDTOMap.get(i);
+            }
+        }
+        return null;
+    }
 }

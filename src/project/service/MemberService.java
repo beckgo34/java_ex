@@ -46,6 +46,7 @@ public class MemberService {
         String memberPass = scanner.next();
         MemberDTO memberDTO = memberRepository.login(memberEmail,memberPass);
         if(memberDTO != null){
+            CommonVariables.loginEmail = memberEmail;
             System.out.println(memberEmail + "님 환영합니다");
         }else{
             System.out.println("이메일 또는 비밀번호가 틀렸습니다.");

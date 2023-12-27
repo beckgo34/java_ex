@@ -1,6 +1,7 @@
 package project.service;
 
 import project.common.CommonVariables;
+import project.dto.AdminDTO;
 import project.dto.GoodsDTO;
 import project.repository.AdminRepository;
 
@@ -29,16 +30,30 @@ public class AdminService {
         }
     }
 
-//    public void list() {
-//        if (CommonVariables.loginAdminEmail != null){
-//            System.out.println("비밀번호: ");
-//            String memberPass = scanner.next();
-//            GoodsDTO goodsDTO = adminRepository.list(memberPass);
-//            if (goodsDTO != null){
-//                System.out.println(goodsDTO);
-//            }else {
-//                System.out.println("등록된 상품이 없습니다");
-//            }
-//        }
-//    }
+    public void login() {
+        System.out.println("이메일: ");
+        String adminEmail = scanner.next();
+        System.out.println("비밀번호: ");
+        String adminPass = scanner.next();
+        AdminDTO adminDTO = adminRepository.login(adminEmail, adminPass);
+        if (adminDTO != null){
+            CommonVariables.loginAdminEmail = adminEmail;
+            System.out.println("관리자 로그인 성공");
+        }else {
+            System.out.println("로그인 실패");
+        }
+    }
+
+    public void list() {
+        if (CommonVariables.loginAdminEmail != null){
+            System.out.println("비밀번호: ");
+            String memberPass = scanner.next();
+            GoodsDTO goodsDTO = adminRepository.list(memberPass);
+            if (goodsDTO != null){
+                System.out.println(goodsDTO);
+            }else {
+                System.out.println("등록된 상품이 없습니다");
+            }
+        }
+    }
 }

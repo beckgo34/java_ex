@@ -52,6 +52,7 @@ public class ShoppingMallMain {
                                 }
                             }
                     } else if (selcetLogin == 2) {
+                            adminService.login();
                         boolean runSeller = true;
                         if (CommonVariables.loginAdminEmail != null) {
                             while (runSeller) {
@@ -60,7 +61,7 @@ public class ShoppingMallMain {
                                 if (selectSeller == 1) {
                                     adminService.goodsSave();
                                 } else if (selectSeller == 2) {
-//                                    adminService.list();
+                                    adminService.list();
                                 } else if (selectSeller == 3) {
 
                                 } else if (selectSeller == 4)
@@ -75,7 +76,6 @@ public class ShoppingMallMain {
                 }
             } else if (selectNo == 2) {
                 memberService.save();
-
             } else if (selectNo == 3) {
                 memberService.update();
             } else if (selectNo == 4) {
