@@ -51,9 +51,9 @@ public class AdminService {
     public void list() {
         if (CommonVariables.loginAdminEmail != null) {
             Map<Long, GoodsDTO> goodsDTOMap = adminRepository.list();
-            for (Long i : goodsDTOMap.keySet()) {
-                System.out.println(goodsDTOMap.get(i));
-            }
+//            for (Long i : goodsDTOMap.keySet()) {
+                System.out.println(goodsDTOMap);
+//            }
         }
     }
 }

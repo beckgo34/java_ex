@@ -20,7 +20,7 @@ public class AdminRepository {
 
     public boolean goodsSave(GoodsDTO goodsDTO) {
         GoodsDTO goodsDTO1 = adminDTOMap.put(goodsDTO.getProductId(), goodsDTO);
-        if (goodsDTO1 == null) {
+        if (goodsDTO1 != null) {
             return true;
         } else {
             return false;

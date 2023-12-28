@@ -3,6 +3,8 @@ package project.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import static project.repository.AdminRepository.adminDTOMap;
+
 public class GoodsDTO {
     public static List<GoodsDTO> goodsDTOList = new ArrayList<>();
     private Long productId;
@@ -48,10 +50,10 @@ public class GoodsDTO {
         GoodsDTO goodsDTO2 = new GoodsDTO("라임소다", 28000, 100);
         GoodsDTO goodsDTO3 = new GoodsDTO("체리밤", 28000, 100);
         GoodsDTO goodsDTO4 = new GoodsDTO("라스트베리", 28000, 100);
-        goodsDTOList.add(goodsDTO1);
-        goodsDTOList.add(goodsDTO2);
-        goodsDTOList.add(goodsDTO3);
-        goodsDTOList.add(goodsDTO4);
+        adminDTOMap.put(goodsDTO1.getProductId(), goodsDTO1);
+        adminDTOMap.put(goodsDTO2.getProductId(), goodsDTO2);
+        adminDTOMap.put(goodsDTO3.getProductId(), goodsDTO3);
+        adminDTOMap.put(goodsDTO4.getProductId(), goodsDTO4);
     }
 
     public GoodsDTO() {
