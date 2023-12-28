@@ -1,6 +1,7 @@
 package project;
 
 import project.common.CommonVariables;
+import project.dto.GoodsDTO;
 import project.service.AdminService;
 import project.service.MemberService;
 import project.service.ProductPurchaseService;
@@ -15,6 +16,7 @@ public class ShoppingMallMain {
         AdminService adminService = new AdminService();
         boolean run = true;
         int selectNo = 0;
+
 
         while (run) {
             System.out.println("-------------------------------------------------------------------------------------------");
@@ -52,11 +54,12 @@ public class ShoppingMallMain {
                                 }
                             }
                     } else if (selcetLogin == 2) {
-                            adminService.login();
+                        adminService.login();
                         boolean runSeller = true;
                         if (CommonVariables.loginAdminEmail != null) {
                             while (runSeller) {
                                 System.out.println("1.재품등록 | 2.재품목록 | 3.판매금액 | 4.뒤로가기");
+                                System.out.println("선택: ");
                                 int selectSeller = scanner.nextInt();
                                 if (selectSeller == 1) {
                                     adminService.goodsSave();
@@ -67,6 +70,8 @@ public class ShoppingMallMain {
                                 } else if (selectSeller == 4)
                                     runSeller = false;
                             }
+                        } else {
+                            runLogin = false;
                         }
                     } else if (selcetLogin == 3) {
                     } else if (selcetLogin == 4) {
@@ -88,7 +93,7 @@ public class ShoppingMallMain {
             } else if (selectNo == 7) {
                 System.out.println("프로그램 종료");
                 run = false;
-            }else {
+            } else {
                 System.out.println("번호를 확인해주세요");
             }
         }

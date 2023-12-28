@@ -2,7 +2,7 @@ package project.dto;
 
 public class AdminDTO {
     private String AdminEmail = "admin";
-    private String AdminPass = "1234";
+    private String AdminPass = "aa";
     private Long AdminAccount;
 
     public String getAdminEmail() {

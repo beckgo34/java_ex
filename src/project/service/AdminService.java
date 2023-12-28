@@ -5,18 +5,33 @@ import project.dto.AdminDTO;
 import project.dto.GoodsDTO;
 import project.repository.AdminRepository;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class AdminService {
     Scanner scanner = new Scanner(System.in);
     AdminRepository adminRepository = new AdminRepository();
     ProductPurchaseService productPurchaseService = new ProductPurchaseService();
+
+    public void login() {
+        System.out.println("이메일: ");
+        String adminEmail = scanner.next();
+        System.out.println("비밀번호: ");
+        String adminPass = scanner.next();
+        AdminDTO adminDTO = adminRepository.login(adminEmail, adminPass);
+        if (adminDTO != null) {
+            CommonVariables.loginAdminEmail = adminEmail;
+            System.out.println("관리자 로그인 성공");
+        } else {
+            System.out.println("로그인 실패");
+        }
+    }
     public void goodsSave() {
         if (CommonVariables.loginAdminEmail != null) {
             System.out.println("상품이름: ");
             String productName = scanner.next();
             System.out.println("상품가격: ");
-            Long price = scanner.nextLong();
+            int price = scanner.nextInt();
             System.out.println("수량: ");
             int quantity = scanner.nextInt();
 
@@ -27,32 +42,17 @@ public class AdminService {
             } else {
                 System.out.println("상품등록 실패");
             }
+        }else{
+            System.out.println("로그인을 해야합니다");
         }
     }
 
-    public void login() {
-        System.out.println("이메일: ");
-        String adminEmail = scanner.next();
-        System.out.println("비밀번호: ");
-        String adminPass = scanner.next();
-        AdminDTO adminDTO = adminRepository.login(adminEmail, adminPass);
-        if (adminDTO != null){
-            CommonVariables.loginAdminEmail = adminEmail;
-            System.out.println("관리자 로그인 성공");
-        }else {
-            System.out.println("로그인 실패");
-        }
-    }
 
     public void list() {
-        if (CommonVariables.loginAdminEmail != null){
-            System.out.println("비밀번호: ");
-            String memberPass = scanner.next();
-            GoodsDTO goodsDTO = adminRepository.list(memberPass);
-            if (goodsDTO != null){
-                System.out.println(goodsDTO);
-            }else {
-                System.out.println("등록된 상품이 없습니다");
+        if (CommonVariables.loginAdminEmail != null) {
+            Map<Long, GoodsDTO> goodsDTOMap = adminRepository.list();
+            for (Long i : goodsDTOMap.keySet()) {
+                System.out.println(goodsDTOMap.get(i));
             }
         }
     }
