@@ -21,8 +21,8 @@ public class ShoppingMallMain {
 
         while (run) {
             goodsService.GoodsLiquidAdd();
-            goodsService.GoodsCoilAdd();
-            goodsService.GoodsPodsAdd();
+//            goodsService.GoodsCoilAdd();
+//            goodsService.GoodsPodsAdd();
             System.out.println("-------------------------------------------------------------------------------------------");
             System.out.println("============= 쥬링쥬스는 로그인을 하셔야 서비스를 이용하실 수 있습니다 =============");
             System.out.println("1.로그인 | 2.일반회원가입 | 3.회원정보수정 | 4.회원정보 | 5.회원탈퇴 | 6.로그아웃| 7.프로그램 종료");

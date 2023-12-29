@@ -20,20 +20,20 @@ public class GoodsService {
         adminRepository.goodsSave(goodsDTO4);
 
     }
-    public void GoodsCoilAdd(){
-        GoodsDTO goodsDTO1 = new GoodsDTO("0.6옴", 3800, 100);
-        adminRepository.coliSave(goodsDTO1);
-        GoodsDTO goodsDTO2 = new GoodsDTO("0.8옴", 3800, 100);
-        adminRepository.coliSave(goodsDTO2);
-        GoodsDTO goodsDTO3 = new GoodsDTO("1.0옴", 3800, 100);
-        adminRepository.coliSave(goodsDTO3);
-    }
-
-    public void GoodsPodsAdd(){
-        GoodsDTO goodsDTO1 = new GoodsDTO("블랙공팟", 4500, 100);
-        adminRepository.goodsSave(goodsDTO1);
-        GoodsDTO goodsDTO2 = new GoodsDTO("클리어공팟", 4500, 100);
-        adminRepository.goodsSave(goodsDTO2);
-
-    }
+//    public void GoodsCoilAdd(){
+//        GoodsDTO goodsDTO1 = new GoodsDTO("0.6옴", 3800, 100);
+//        adminRepository.coliSave(goodsDTO1);
+//        GoodsDTO goodsDTO2 = new GoodsDTO("0.8옴", 3800, 100);
+//        adminRepository.coliSave(goodsDTO2);
+//        GoodsDTO goodsDTO3 = new GoodsDTO("1.0옴", 3800, 100);
+//        adminRepository.coliSave(goodsDTO3);
+//    }
+//
+//    public void GoodsPodsAdd(){
+//        GoodsDTO goodsDTO1 = new GoodsDTO("블랙공팟", 4500, 100);
+//        adminRepository.goodsSave(goodsDTO1);
+//        GoodsDTO goodsDTO2 = new GoodsDTO("클리어공팟", 4500, 100);
+//        adminRepository.goodsSave(goodsDTO2);
+//
+//    }
 }
