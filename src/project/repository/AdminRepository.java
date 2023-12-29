@@ -11,19 +11,13 @@ import java.util.List;
 import java.util.Map;
 
 public class AdminRepository {
-    public static List<GoodsDTO> goodsDTOList = new ArrayList<>();
+    public List<GoodsDTO> goodsDTOList = new ArrayList<>();
 
 //    List<AdminDTO> adminDTOList = new ArrayList<>();
 
     public boolean goodsSave(GoodsDTO goodsDTO) {
         return goodsDTOList.add(goodsDTO);
     }
-
-    public boolean coliSave(GoodsDTO goodsDTO) {
-        return goodsDTOList.add(goodsDTO);
-    }
-
-
 
     public AdminDTO login(String adminEmail, String adminPass) {
         AdminDTO adminDTO = new AdminDTO();
@@ -33,11 +27,7 @@ public class AdminRepository {
         return null;
     }
 
-
     public List<GoodsDTO> list() {
         return goodsDTOList;
-
     }
-
-
 }
