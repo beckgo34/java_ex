@@ -58,17 +58,6 @@ public class AdminService {
             AdminDTO adminDTO = new AdminDTO();
             System.out.println(adminDTO.getAdminAccount());
         }
-    public void goodsLiquidSave() {
-        List<GoodsDTO> goodsDTOList = adminRepository.goodsLiqudSave();
-        System.out.println(goodsDTOList);
-    }
-    public void goodsCoilSave() {
-        List<GoodsDTO> goodsDTOList = adminRepository.goodsCoilSave();
-        System.out.println(goodsDTOList);
-    }
-    public void goodsPodsSave() {
-        List<GoodsDTO> goodsDTOList = adminRepository.goodsPodsSave();
-        System.out.println(goodsDTOList);
-    }
+
     }
 
