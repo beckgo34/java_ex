@@ -5,13 +5,14 @@ import project.dto.AdminDTO;
 import project.dto.GoodsDTO;
 import project.repository.AdminRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class AdminService {
     Scanner scanner = new Scanner(System.in);
     AdminRepository adminRepository = new AdminRepository();
-    ProductPurchaseService productPurchaseService = new ProductPurchaseService();
 
     public void login() {
         System.out.println("이메일: ");
@@ -49,11 +50,25 @@ public class AdminService {
 
 
     public void list() {
-        if (CommonVariables.loginAdminEmail != null) {
-            Map<Long, GoodsDTO> goodsDTOMap = adminRepository.list();
-//            for (Long i : goodsDTOMap.keySet()) {
-                System.out.println(goodsDTOMap);
-//            }
+         List<GoodsDTO> goodsDTOList = adminRepository.list();
+            System.out.println(goodsDTOList);
         }
+
+    public void purchasePrice() {
+            AdminDTO adminDTO = new AdminDTO();
+            System.out.println(adminDTO.getAdminAccount());
+        }
+    public void goodsLiquidSave() {
+        List<GoodsDTO> goodsDTOList = adminRepository.goodsLiqudSave();
+        System.out.println(goodsDTOList);
     }
-}
+    public void goodsCoilSave() {
+        List<GoodsDTO> goodsDTOList = adminRepository.goodsCoilSave();
+        System.out.println(goodsDTOList);
+    }
+    public void goodsPodsSave() {
+        List<GoodsDTO> goodsDTOList = adminRepository.goodsPodsSave();
+        System.out.println(goodsDTOList);
+    }
+    }
+

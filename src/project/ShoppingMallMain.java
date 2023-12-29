@@ -1,24 +1,28 @@
 package project;
 
 import project.common.CommonVariables;
-import project.dto.GoodsDTO;
+import project.dto.AdminDTO;
 import project.service.AdminService;
+import project.service.GoodsService;
 import project.service.MemberService;
-import project.service.ProductPurchaseService;
+import project.service.PurchaseService;
 
 import java.util.Scanner;
 
 public class ShoppingMallMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ProductPurchaseService productPurchaseService = new ProductPurchaseService();
+        PurchaseService purchaseService = new PurchaseService();
         MemberService memberService = new MemberService();
         AdminService adminService = new AdminService();
         boolean run = true;
         int selectNo = 0;
-
+        GoodsService goodsService = new GoodsService();
 
         while (run) {
+            goodsService.GoodsLiquidAdd();
+            goodsService.GoodsCoilAdd();
+            goodsService.GoodsPodsAdd();
             System.out.println("-------------------------------------------------------------------------------------------");
             System.out.println("============= 쥬링쥬스는 로그인을 하셔야 서비스를 이용하실 수 있습니다 =============");
             System.out.println("1.로그인 | 2.일반회원가입 | 3.회원정보수정 | 4.회원정보 | 5.회원탈퇴 | 6.로그아웃| 7.프로그램 종료");
@@ -36,7 +40,7 @@ public class ShoppingMallMain {
                     if (selcetLogin == 1) {
                         memberService.login();
                         boolean runPurchase = true;
-                        if (CommonVariables.loginAdminEmail != null)
+                        if (CommonVariables.loginEmail != null)
                             while (runPurchase) {
                                 System.out.println("-------------------------------------------");
                                 System.out.println("1.액상구매 | 2.코일구매 | 3.팟구매 | 4.뒤로가기");
@@ -44,7 +48,7 @@ public class ShoppingMallMain {
                                 System.out.println("선택: ");
                                 int selectPurchase = scanner.nextInt();
                                 if (selectPurchase == 1) {
-
+                                        purchaseService.liquidPurchase();
                                 } else if (selectPurchase == 2) {
 
                                 } else if (selectPurchase == 3) {
@@ -55,6 +59,7 @@ public class ShoppingMallMain {
                             }
                     } else if (selcetLogin == 2) {
                         adminService.login();
+                        AdminDTO adminDTO = new AdminDTO();
                         boolean runSeller = true;
                         if (CommonVariables.loginAdminEmail != null) {
                             while (runSeller) {
@@ -66,7 +71,7 @@ public class ShoppingMallMain {
                                 } else if (selectSeller == 2) {
                                     adminService.list();
                                 } else if (selectSeller == 3) {
-
+                                    adminService.purchasePrice();
                                 } else if (selectSeller == 4)
                                     runSeller = false;
                             }
@@ -74,6 +79,7 @@ public class ShoppingMallMain {
                             runLogin = false;
                         }
                     } else if (selcetLogin == 3) {
+                        runLogin = false;
                     } else if (selcetLogin == 4) {
                         runLogin = false;
 

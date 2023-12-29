@@ -3,7 +3,7 @@ package project.dto;
 public class AdminDTO {
     private String AdminEmail = "admin";
     private String AdminPass = "aa";
-    private Long AdminAccount;
+    private int AdminAccount;
 
     public String getAdminEmail() {
         return AdminEmail;
@@ -21,18 +21,18 @@ public class AdminDTO {
         AdminPass = adminPass;
     }
 
-    public Long getAdminAccount() {
+    public int getAdminAccount() {
         return AdminAccount;
     }
 
-    public void setAdminAccount(Long adminAccount) {
+    public void setAdminAccount(int adminAccount) {
         AdminAccount = adminAccount;
     }
 
     public AdminDTO() {
     }
 
-    public AdminDTO(String adminEmail, String adminPass, Long adminAccount) {
+    public AdminDTO(String adminEmail, String adminPass, int adminAccount) {
         AdminEmail = adminEmail;
         AdminPass = adminPass;
         AdminAccount = adminAccount;

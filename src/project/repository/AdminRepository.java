@@ -3,6 +3,7 @@ package project.repository;
 import project.common.CommonVariables;
 import project.dto.AdminDTO;
 import project.dto.GoodsDTO;
+import project.service.GoodsService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,22 +11,18 @@ import java.util.List;
 import java.util.Map;
 
 public class AdminRepository {
-    public static Map<Long, GoodsDTO> adminDTOMap = new HashMap<>();
-    public static List<AdminDTO> adminDTOList = new ArrayList<>();
+    public static List<GoodsDTO> goodsDTOList = new ArrayList<>();
 
-    static {
-        GoodsDTO.GoodsLiquidAdd();
-    }
-
+//    List<AdminDTO> adminDTOList = new ArrayList<>();
 
     public boolean goodsSave(GoodsDTO goodsDTO) {
-        GoodsDTO goodsDTO1 = adminDTOMap.put(goodsDTO.getProductId(), goodsDTO);
-        if (goodsDTO1 != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return goodsDTOList.add(goodsDTO);
     }
+
+    public boolean coliSave(GoodsDTO goodsDTO) {
+        return goodsDTOList.add(goodsDTO);
+    }
+
 
 
     public AdminDTO login(String adminEmail, String adminPass) {
@@ -37,9 +34,10 @@ public class AdminRepository {
     }
 
 
-    public Map<Long, GoodsDTO> list() {
-        System.out.println();
-        return adminDTOMap;
+    public List<GoodsDTO> list() {
+        return goodsDTOList;
 
     }
+
+
 }
