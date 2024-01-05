@@ -867,5 +867,101 @@ alter table student change s_mobile s_phone varchar(30);
 alter table student drop s_major;
 -- 1/5 오전 수업 끝
 
+-- 1/5 오후 수업 시작
+drop table if exists member_table;
+create table member_table(
+	id bigint auto_increment,
+    member_email varchar(30) not null,
+    member_name varchar(20) not null,
+    member_password varchar(20) not null,
+    constraint pk_member_id primary key(id)
+);
+desc member_table;
+
+drop table if exists board_table;
+create table board_table(
+	id bigint auto_increment,
+    board_title varchar(50) not null,
+    board_writer varchar(30) not null,
+    board_contents varchar(500),
+    board_hits int default 0,
+    board_created_at datetime default now(),
+    board_ipdate_at datetime on update now(),
+    board_file_attached int default 0,
+    member_id bigint,
+    category_id bigint,
+    constraint pk_board_id primary key (id),
+    constraint fk_board_member_id foreign key (member_id) references member_table(id) on delete cascade,
+    constraint fk_board_category_id foreign key (category_id) references category_table(id) on delete set null
+);
+desc board_table;
+
+drop table if exists comment_table;
+create table comment_table(
+	id bigint auto_increment,
+    comment_writer varchar(30) not null,
+    comment_contents varchar(200) not null,
+    comment_created_at datetime default now(),
+    board_id bigint,
+    member_id bigint,
+    constraint pk_comment_id primary key (id),
+    constraint fk_comment_member_id foreign key (member_id) references member_table(id) on delete cascade,
+    constraint fk_comment_board_id foreign key (board_id) references board_table(id) on delete cascade
+);
+desc comment_table;
+
+drop table if exists board_file_table;
+create table board_file_table(
+	id bigint auto_increment,
+    original_file_name varchar(100),
+    stored_file_name varchar(100),
+    board_id bigint,
+    constraint pk_board_file_table primary key (id),
+    constraint fk_board_file_board_id foreign key (board_id) references board_table(id) on delete cascade
+);
+desc board_file_table;
+
+drop table if exists good_table;
+create table good_table(
+	id bigint auto_increment,
+    comment_id bigint,
+    member_id bigint,
+    constraint pk_good_table_id primary key (id),
+    constraint fk_good_table_comment_id foreign key (comment_id) references comment_table(id) on delete cascade,
+    constraint fk_good_table_member_id foreign key (member_id) references member_table(id) on delete cascade
+);
+desc good_table;
+
+drop table if exists category_table;
+create table category_table(
+	id bigint auto_increment,
+    category_name varchar(20) not null,
+    constraint pk_category_table_id primary key (id)
+);
+desc category_table;
+
+-- 회원 기능
+-- 1. 회원가입(임의의 회원3명 가입)
+insert into member_table (member_email, member_name, member_password) values('aa@member.com', 'aaa', '1234');
+insert into member_table (member_email, member_name, member_password) values('bb@member.com', 'bbb', '1234');
+insert into member_table (member_email, member_name, member_password) values('cc@member.com', 'ccc', '1234');
+-- 2. 이메일 중복체크
+select member_email from member_table where member_email = '?';
+-- 3. 로그인
+select * from member_table where member_email = '?' and member_password = '?' ;
+-- 4. 전체 회원 목록 조회
+select * from member_table;
+-- 5. 특정 회원만 조회
+select * from member_table where member_email = '?';
+select * from member_table where id = '?';
+-- 6. 내정보 수정하기(6.1, 6.2에 해당하는 쿼리문작성)
+-- 6.1 회원정보 수정화면 요청(회원정보 수정 페이지를 보여준다고 가정했을 때 필요한 쿼리)
+select * from member_table where id = '?';
+-- 6.2 회원정보 수정 처리(비밀번호를 변경한다는 상황)
+update member_table set member_password = '?' where id=?;
+-- 7. 회원 삭제 또는 탈퇴
+delete from member_table where member_email = '?' and member_password = '?';
+delete from member_table where id=?;
+
 */
 }
