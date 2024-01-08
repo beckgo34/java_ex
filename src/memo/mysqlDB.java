@@ -963,5 +963,102 @@ update member_table set member_password = '?' where id=?;
 delete from member_table where member_email = '?' and member_password = '?';
 delete from member_table where id=?;
 
+-- 1/8 오전 수업 시작
+-- 게시글 카테고리
+-- 게시판 카테고리는 자유게시판, 공지사항, 가입인사 세가지가 있음.
+-- 카테고리 세가지 미리 저장
+insert into category_table (category_name) values('자유게시판');
+insert into category_table (category_name) values('공지사항');
+insert into category_table (category_name) values('가입인사');
+select * from category_table;
+-- 게시판 기능
+-- 1. 게시글 작성(파일첨부 x) 3개 이상
+insert into board_table (board_title, board_writer, board_contents) values('aa', 'aa', 'aa');
+insert into board_table (board_title, board_writer, board_contents) values('aaa', 'aa', 'aaa');
+insert into board_table (board_title, board_writer, board_contents) values('aaaa', 'aa', 'aaaa');
+-- 1. 게시글 작성(파일첨부 x) 3개 이상  선생님버전
+insert into board_table (board_title, board_writer, board_contents, member_id, category_id)
+				values('안녕하세요', 'aa@member.com', '야야야', 1, 1);
+-- 1번 회원이 자유게시판 글 2개, 공지사항 글 1개 작성
+insert into board_table (category_id, board_title, board_writer, board_contents) values(1, 'ss', 'aa', 'sss');
+insert into board_table (category_id, board_title, board_writer, board_contents) values(1, 'dd', 'aaa', 'ddd');
+insert into board_table (category_id, board_title, board_writer, board_contents) values(2, 'cc', 'aaa', 'cccc');
+-- 2번 회원이 자유게시판 글 3개 작성
+insert into board_table (category_id, board_title, board_writer, board_contents) values(1, 'a', 'bb', 'a');
+insert into board_table (category_id, board_title, board_writer, board_contents) values(1, 's', 'bb', 's');
+insert into board_table (category_id, board_title, board_writer, board_contents) values(1, 'd', 'bb', 'd');
+-- 3번 회원이 가입인사 글 1개 작성
+insert into board_table (category_id, board_title, board_writer, board_contents) values(3, 'v', 'ccc', 'v');
+select * from board_table;
+
+-- 1.1. 게시글 작성(파일첨부 o)
+insert into board_table (board_title, board_writer, board_contents, board_file_attached)
+					values('hh', 'tt', 'gg', 11);
+-- 첨부된 파일정보를 board_file_table에 저장
+-- 사용자가 첨부한 파일 이름: 한라산.jpg
+insert into board_file_table(original_file_name, stored_file_name, board_id)
+						values('한라산.jpg', '2234594384394_한라산',  12); -- 여기서 12는 게시글 번호(id)
+-- 2번 회원이 파일있는 자유게시판 글 2개 작성
+insert into board_table (category_id, board_title, board_writer, board_contents, board_file_attached)
+					values(1, '?', 'bbb', '?', 22);
+-- 2. 게시글 목록 조회
+-- 2.1 전체글 목록 조회
+select * from board_table;
+select id, board_title, board_writer, board_hits, board_created_at from board_table;
+-- 2.2 자유게시판 목록 조회
+select * from board_table bt, category_table ct where bt.category_id = ct.id and ct.category_name = '자유게시판';
+select * from board_table where category_id = 1;
+-- 2.3 공지사항 목록 조회
+select * from board_table bt, category_table ct where bt.category_id = ct.id and ct.category_name = '공지사항';
+select * from board_table where category_id = 2;
+-- 2.4 목록 조회시 카테고리 이름도 함께 나오게 조회
+select * from board_table bt, category_table ct where bt.category_id = ct.id;
+-- 3. 2번 게시글 조회 (조회수 처리 필요함)
+update board_table set board_hits = board_hits +1 where id=2;
+select * from board_table where id = 2;
+-- 3.1. 파일 첨부된 게시글 조회 (게시글 내용과 파일을 함께)
+update board_table set board_hits = board_hits +1 where id=12;
+-- 게시글 내용만 가져옴
+select * from board_table where id= 12;
+-- 해당 게시글에 첨부된 파일 정보 가져옴
+select * from board_file_table where board_id =12;
+-- join
+select * from board_table b, board_file_table bf where b.id = bf.board_id and b.id =12;
+-- 4. 1번 회원이 자유게시판에 첫번째로 작성한 게시글의 제목, 내용 수정
+select * from board_table where id= 1;
+update board_table set board_title = 'mm', board_contents = '123' where id = 1;
+select * from board_table;
+-- 5. 2번 회원이 자유게시판에 첫번째로 작성한 게시글 삭제
+delete from board_table where id= 9;
+-- 7. 페이징 처리(한 페이지당 글 3개씩)
+select * from board_table order by id desc;
+select * from board_table order by id desc limit 0, 3; -- 17 16 15  -- 1페이지
+select * from board_table order by id desc limit 3, 3; -- 14 13 12	-- 2페이지
+select * from board_table order by id desc limit 6, 3; -- 7 6 4		-- 3페이지
+-- 한 페이지당 글 5개씩
+select * from board_table order by id desc limit 0, 5;  -- 1페이지
+select * from board_table order by id desc limit 5, 5;  -- 2페이지
+select * from board_table order by id desc limit 10, 5; -- 3페이지
+-- 한페이지당 3개씩 출력하는 경우 전체 글 수가 20개라면 필요한 페이지 갯수는? 7개
+
+-- 7.1. 첫번째 페이지
+-- 7.2. 두번째 페이지
+-- 7.3. 세번째 페이지
+-- 8. 검색(글제목 기준)
+-- 8.1 검색결과를 오래된 순으로 조회
+select * from board_table order by  board_created_at desc;
+-- 8.2 검색결과를 조회수 내림차순으로 조회
+select * from board_table order by board_hits asc;
+-- 8. 검색(글제목 기준)
+select * from board_table where board_title like '%오늘%';
+-- 8.1 검색결과를 오래된 순으로 조회
+select * from board_table where board_title like '%오늘%' order by id asc;
+-- 8.2 검색결과를 조회수 내림차순으로 조회
+select * from board_table where board_title like '%오늘%' order by board_hits desc;
+-- 8.3 검색결과 페이징 처리
+select * from board_table where board_title like '%오늘%' order by board_hits desc limit 0, 3;
+
+-- 1/8 오전수업 끝
+
 */
 }
