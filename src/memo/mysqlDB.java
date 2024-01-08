@@ -1060,5 +1060,178 @@ select * from board_table where board_title like '%오늘%' order by board_hits 
 
 -- 1/8 오전수업 끝
 
+-- 1/8 오후수업 시작
+-- 댓글 기능
+select * from comment_table;
+-- 1. 댓글 작성
+-- 1.1. 1번 회원이 1번 게시글에 댓글 작성
+insert into comment_table(comment_writer, comment_contents, board_id, member_id)values('aa', '아아', 1, 1);
+-- 1.2. 2번 회원이 1번 게시글에 댓글 작성
+insert into comment_table(comment_writer, comment_contents, board_id, member_id)values('bb', '쿨쿨', 1, 2);
+-- 2. 댓글 조회
+select * from comment_table where id = 1;
+select * from comment_table where board_id =1;
+select * from board_table b, comment_table c where b.id= c.board_id and b.id = 1;
+-- 3. 댓글 좋아요
+select * from good_table;
+-- 3.1. 1번 회원이 2번 회원이 작성한 댓글에 좋아요 클릭
+-- 좋아요 했는지 체크
+select id from good_table where comment_id = 2 and member_id = 1;
+-- 좋아요
+insert into good_table(comment_id, member_id) values (2, 1);
+-- 좋아요 취소
+delete from good_table where id=1;
+-- 3.2. 3번 회원이 2번 회원이 작성한 댓글에 좋아요 클릭
+-- 4. 댓글 조회시 좋아요 갯수도 함께 조회
+select count(*) from good_table where comment_id =1;
+
+drop table if exists member_tbl_02;
+create table member_tbl_02(
+	custno int,
+    custname varchar(20),
+    phone varchar(13),
+    address varchar(60),
+    joindate date,
+    grade char(1),
+    city char(2),
+    constraint pk_member_tbl_02 primary key (custno)
+);
+desc member_tbl_02;
+
+insert into member_tbl_02 values(100001, '김행복', '010-1111-2222', '서울 동대문구 휘경1동', '20151202', 'A', '01');
+insert into member_tbl_02 values(100002, '이축복', '010-1111-3333', '서울 동대문구 휘경2동', '20151206', 'B', '01');
+insert into member_tbl_02 values(100003, '장믿음', '010-1111-4444', '울릉군 울릉읍 독도1리', '20151001', 'B', '30');
+insert into member_tbl_02 values(100004, '최사랑', '010-1111-5555', '울릉군 울릉읍 독도2리', '20151103', 'A', '30');
+insert into member_tbl_02 values(100005, '진평화', '010-1111-6666', '제주도 제주시 외나무골', '20151225', 'B', '60');
+insert into member_tbl_02 values(100006, '차공단', '010-1111-7777', '제주도 제주시 감나무골', '20151211', 'C', '60');
+select * from member_tbl_02;
+
+drop table if exists money_tbl_02;
+create table money_tbl_02(
+	custno int,
+    saleno int auto_increment,
+    pcost int,
+    amount int,
+    price int,
+    pcode varchar(4),
+    sdate date,
+    constraint pk_money_tbl_02 primary key (saleno)
+);
+desc money_tbl_02;
+
+insert into money_tbl_02(custno, pcost, amount, price, pcode, sdate) values(100001, 500, 5, 2500, 'A001', '20160101');
+insert into money_tbl_02(custno, pcost, amount, price, pcode, sdate) values(100001, 1000, 4, 4000, 'A002', '20160101');
+insert into money_tbl_02(custno, pcost, amount, price, pcode, sdate) values(100001, 500, 3, 1500, 'A008', '20160101');
+insert into money_tbl_02(custno, pcost, amount, price, pcode, sdate) values(100002, 2000, 1, 2000, 'A004', '20160102');
+insert into money_tbl_02(custno, pcost, amount, price, pcode, sdate) values(100002, 500, 1, 500, 'A001', '20160103');
+insert into money_tbl_02(custno, pcost, amount, price, pcode, sdate) values(100003, 1500, 2, 3000, 'A003', '20160103');
+insert into money_tbl_02(custno, pcost, amount, price, pcode, sdate) values(100004, 500, 2, 1000, 'A001', '20160104');
+insert into money_tbl_02(custno, pcost, amount, price, pcode, sdate) values(100004, 300, 1, 300, 'A005', '20160104');
+insert into money_tbl_02(custno, pcost, amount, price, pcode, sdate) values(100004, 600, 1, 600, 'A006', '20160104');
+insert into money_tbl_02(custno, pcost, amount, price, pcode, sdate) values(100004, 3000, 1, 3000, 'A007', '20160106');
+select * from money_tbl_02;
+
+select
+	custno, custname, phone, address, joindate,
+	case 	when grade = 'A' then 'VIP'
+			when grade = 'B' then '일반'
+			when grade = 'C' then '직원'
+			else '없음'
+	end as grede,
+    city
+    from member_tbl_02;
+
+select
+	mb.custno as '회원번호',
+    custname as '회원성명',
+    case when grade = 'A' then 'VIP'
+		 when grade = 'B' then '일반'
+         when grade = 'C' then '직원'
+         else '없음'
+		 end as '고객등급',
+	sum(price) as '매출'
+	from member_tbl_02 mb, money_tbl_02 my
+		where mb.custno = my.custno
+		group by mb.custno
+		order by 매출 desc;
+
+
+drop table if exists tbl_member_202005;
+create table tbl_member_202005(
+	m_no char(1),
+    m_name varchar(20),
+    p_code char(2),
+    p_school char(1),
+    m_jumin char(13),
+    m_city varchar(20),
+    constraint pk_member primary key (m_no)
+);
+desc tbl_member_202005;
+
+insert into tbl_vote_202005 values ('99010110001', '김유권', '1', '0930', '제1투표장', 'N');
+insert into tbl_vote_202005 values ('89010120002', '이유권', '2', '0930', '제1투표장', 'N');
+insert into tbl_vote_202005 values ('69010110003', '박유권', '3', '0930', '제1투표장', 'Y');
+insert into tbl_vote_202005 values ('59010120004', '홍유권', '4', '0930', '제1투표장', 'Y');
+insert into tbl_vote_202005 values ('79010110005', '조유권', '5', '0930', '제1투표장', 'Y');
+insert into tbl_vote_202005 values ('89010120006', '최유권', '1', '0930', '제1투표장', 'Y');
+insert into tbl_vote_202005 values ('59010110007', '지유권', '1', '0930', '제1투표장', 'Y');
+insert into tbl_vote_202005 values ('49010120008', '장유권', '3', '0930', '제1투표장', 'Y');
+insert into tbl_vote_202005 values ('79010110009', '정유권', '3', '0930', '제1투표장', 'Y');
+insert into tbl_vote_202005 values ('89010120010', '강유권', '4', '0930', '제1투표장', 'Y');
+insert into tbl_vote_202005 values ('99010110011', '신유권', '5', '0930', '제1투표장', 'Y');
+insert into tbl_vote_202005 values ('79010120012', '오유권', '1', '1330', '제1투표장', 'Y');
+insert into tbl_vote_202005 values ('69010110013', '현유권', '4', '1330', '제2투표장', 'Y');
+insert into tbl_vote_202005 values ('89010110014', '왕유권', '2', '1330', '제2투표장', 'Y');
+insert into tbl_vote_202005 values ('99010110015', '유유권', '3', '1330', '제2투표장', 'Y');
+insert into tbl_vote_202005 values ('79010110016', '한유권', '2', '1330', '제2투표장', 'Y');
+insert into tbl_vote_202005 values ('89010110017', '문유권', '4', '1330', '제2투표장', 'Y');
+insert into tbl_vote_202005 values ('99010110018', '양유권', '2', '1330', '제2투표장', 'Y');
+insert into tbl_vote_202005 values ('99010110019', '구유권', '4', '1330', '제2투표장', 'Y');
+insert into tbl_vote_202005 values ('79010110020', '황유권', '5', '1330', '제2투표장', 'Y');
+insert into tbl_vote_202005 values ('69010110021', '배유권', '3', '1330', '제2투표장', 'Y');
+insert into tbl_vote_202005 values ('79010110022', '전유권', '3', '1330', '제2투표장', 'Y');
+insert into tbl_vote_202005 values ('99010110023', '고유권', '1', '1330', '제2투표장', 'Y');
+insert into tbl_vote_202005 values ('59010110024', '권유권', '3', '1330', '제2투표장', 'Y');
+select * from tbl_vote_202005;
+
+drop table if exists tbl_vote_202005;
+create table tbl_vote_202005(
+	v_jumin char(13),
+    v_name varchar(20),
+    m_no char(1),
+    v_time char(4),
+    v_area char(20),
+    v_confirm char(1),
+    constraint pk_vote primary key (v_jumin)
+);
+desc tbl_vote_202005;
+
+insert into tbl_member_202005 values ('1', '김후보', 'P1', '1', '6603011999991', '수선화동');
+insert into tbl_member_202005 values ('2', '이후보', 'P2', '3', '5503011999992', '민들래동');
+insert into tbl_member_202005 values ('3', '박후보', 'P3', '2', '7703011999993', '나팔꽃동');
+insert into tbl_member_202005 values ('4', '조후보', 'P4', '2', '8803011999994', '진달래동');
+insert into tbl_member_202005 values ('5', '최후보', 'P5', '3', '9903011999995', '개나리동');
+select * from tbl_member_202005;
+
+drop table if exists tbl_party_202005;
+create table tbl_party_202005(
+	p_code char(2),
+    p_name varchar(20),
+    p_indate date,
+    p_reader varchar(20),
+    p_tel1 char(3),
+    p_tel2 char(4),
+    p_tel3 char(4),
+    constraint pk_party primary key (p_code)
+);
+desc tbl_party_202005;
+
+insert into tbl_party_202005 values ('P1', 'A정당', '2010-01-01', '위대표', '02', '1111', '0001');
+insert into tbl_party_202005 values ('P2', 'B정당', '2010-02-01', '명대표', '02', '1111', '0002');
+insert into tbl_party_202005 values ('P3', 'C정당', '2010-03-01', '기대표', '02', '1111', '0003');
+insert into tbl_party_202005 values ('P4', 'D정당', '2010-04-01', '옥대표', '02', '1111', '0004');
+insert into tbl_party_202005 values ('P5', 'E정당', '2010-05-01', '임대표', '02', '1111', '0005');
+select * from tbl_party_202005;
+-- 1/8 수업끝
 */
 }
