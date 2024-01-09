@@ -1233,5 +1233,120 @@ insert into tbl_party_202005 values ('P4', 'D정당', '2010-04-01', '옥대표',
 insert into tbl_party_202005 values ('P5', 'E정당', '2010-05-01', '임대표', '02', '1111', '0005');
 select * from tbl_party_202005;
 -- 1/8 수업끝
+-- 1/9 오전수업 시작
+-- concat(): 문자열을 이어 붙일 때
+-- substr(): 문자열의 특정 범위를 잘라낼 때
+-- 주민번호: 2401093123123 240109-3123123
+select m.m_no,
+	   m.m_name,
+       p.p_name,
+case 	when p_school = '1'	then '고졸'
+		when p_school = '2'	then '학사'
+        when p_school = '3'	then '석사'
+        when p_school = '4' then '박사'
+		else '없음'
+        end p_school,
+        concat(substr(m_jumin, 1, 6), '-', substr(m_jumin, 7, 13)) as '주민번호',
+        concat(p_tel1, '-', p_tel2, '-', p_tel3) as '대표전화'
+       from tbl_member_202005 m, tbl_party_202005 p
+	   where m.p_code = p.p_code;
+
+-- 생년월일
+select concat(
+				case when substr(v_jumin, 7, 1) in('1', '2') then '19'
+					 when substr(v_jumin, 7, 1) in('3', '4') then '20'
+				end,
+				substr(v_jumin, 1, 2), '년', substr(v_jumin, 3, 2), '월', substr(v_jumin, 5, 2), '일생') as '생년월일'
+		from tbl_vote_202005;
+
+-- 만나이 => 현재년도 - 태어난년도
+-- 현재시간
+select now() from dual;
+select 2024-1999 from dual;
+-- 현재시간에서 년도만
+select date_format(now(), '%Y' ) from dual;
+-- 뺄셈에 활용하기 위해 형변환
+select cast(date_format(now(), '%Y') as unsigned) from dual;
+-- 만나이 계산
+select concat(
+				'만',
+				cast(date_format(now(), '%Y') as unsigned) -
+                concat(
+						case when substr(v_jumin, 7, 1) in('1', '2') then '19'
+							 when substr(v_jumin, 7, 1) in('3', '4') then '20'
+							 end,
+                             substr(v_jumin, 1, 2)
+						),
+				'세'
+                ) as '나이'
+		from tbl_vote_202005;
+
+-- 성별
+select
+	case when substr(v_jumin, 7, 1) in('1', '3') then '남'
+		 when substr(v_jumin, 7, 1) in('2', '4') then '여'
+	end as '성별'
+    from tbl_vote_202005;
+
+-- 투표시간
+select
+	concat(substr(v_time, 1,2), ':', substr(v_time, 3, 2))
+    as '투표시간'
+    from tbl_vote_202005;
+
+-- 유권자 확인
+select
+	case when  v_confirm = 'Y' then '확인'
+		 when  v_confirm = 'N' then '미확인'
+	end as '유권자확인'
+    from tbl_vote_202005;
+
+-- 전체 쿼리
+select
+		v_name,
+        -- 생년월일
+         concat(
+				case when substr(v_jumin, 7, 1) in('1', '2') then '19'
+					 when substr(v_jumin, 7, 1) in('3', '4') then '20'
+				end,
+				substr(v_jumin, 1, 2), '년', substr(v_jumin, 3, 2), '월', substr(v_jumin, 5, 2), '일생') as '생년월일',
+                -- 나이
+                concat(
+				'만',
+				cast(date_format(now(), '%Y') as unsigned) -
+                concat(
+						case when substr(v_jumin, 7, 1) in('1', '2') then '19'
+							 when substr(v_jumin, 7, 1) in('3', '4') then '20'
+							 end,
+                             substr(v_jumin, 1, 2)
+						),
+				'세'
+                ) as '나이',
+                -- 성별
+                case when substr(v_jumin, 7, 1) in('1', '3') then '남'
+					 when substr(v_jumin, 7, 1) in('2', '4') then '여'
+				end as '성별',
+                -- 후보번호
+                m_no,
+                -- 투표시간
+                concat(substr(v_time, 1,2), ':', substr(v_time, 3, 2))
+				as '투표시간',
+                -- 유권자확인
+                case when  v_confirm = 'Y' then '확인'
+					 when  v_confirm = 'N' then '미확인'
+				end as '유권자확인'
+                from tbl_vote_202005;
+
+-- 후보자 등수
+select m.m_no as '후보번호',
+	   m.m_name as '후보이름',
+       count(m.m_no) as '총투표건수'
+       from tbl_member_202005 m,
+			tbl_vote_202005 v
+			where m.m_no = v.m_no
+			 and  v.v_confirm = 'y'
+			group by m.m_no, m.m_name
+            order by 총투표건수 desc;
+-- 1/9 데이터베이스 끝
 */
 }
