@@ -20,7 +20,7 @@ public class PurchaseService {
         boolean result = purchaseRepository.liquidPurchase(id);
         System.out.println("111");
         for (int i = 0; i < adminRepository.goodsDTOList.size(); i++) {
-        System.out.println(adminRepository.goodsDTOList.get(i)+"dsd");
+        System.out.println(adminRepository.goodsDTOList.get(i));
         }
         if (result) {
             System.out.println("구매에 성공");

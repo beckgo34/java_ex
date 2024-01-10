@@ -27,6 +27,7 @@ public class AdminService {
             System.out.println("로그인 실패");
         }
     }
+
     public void goodsSave() {
         if (CommonVariables.loginAdminEmail != null) {
             System.out.println("상품이름: ");
@@ -43,21 +44,20 @@ public class AdminService {
             } else {
                 System.out.println("상품등록 실패");
             }
-        }else{
+        } else {
             System.out.println("로그인을 해야합니다");
         }
     }
 
 
     public void list() {
-         List<GoodsDTO> goodsDTOList = adminRepository.list();
-            System.out.println(goodsDTOList);
-        }
+        List<GoodsDTO> goodsDTOList = adminRepository.list();
+        System.out.println(goodsDTOList);
+    }
 
     public void purchasePrice() {
-            AdminDTO adminDTO = new AdminDTO();
-            System.out.println(adminDTO.getAdminAccount());
-        }
-
+        AdminDTO adminDTO = new AdminDTO();
+        System.out.println(adminDTO.getAdminAccount());
     }
+}
 
