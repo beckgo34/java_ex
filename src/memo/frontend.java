@@ -113,6 +113,29 @@ public class frontend {
      *                  a. 위 10px, 우 20px, 아래 30px, 좌 40px (시계방향)
      *          6. margin-top, margin-left, magin bottom, margin-right 와 같이 각각을 따로 지정할
      *             수 있는 속성도 있음
+     *   7. position 속성
+     *      a. 요소를 배치할 떄 사용하는 속성
+     *      b. 종류:static(기본), relative, fixed, absolute, sticky
+     *      c. static
+     *          1. position 속성 값으 별도로 주지 않아도 기본으로 설정되는 값
+     *          2. 요소 배치할 떄는 static 으로 사용 불가
+     *      d. relative
+     *          1. 원래 있어야 할 위치로 부터의 배치
+     *          2. 이 속성을 지정하면 원래 해당 요소가 있어야 할 공간은 비워짐
+     *          3. relative로 배치할 떄 사용하지 않음
+     *          4. 자식 요소를 배치할 떄는 부모요소에 relative 속성을 지정해야 함
+     *      e. absolute
+     *          1. 부모요소를 기준으로 위치를 잡음
+     *          2. 부모요소에 relative 속성을 주고 자식요소는 absolute를 지정하여 배치에 활용
+     *          3. 자신의 직접적인 부모가 relative 속성을 가지고 있지 않으면 더 상위부모를 찾게되고
+     *              그래도 없으면 body를 기준으로 위치를 잡음
+     *      f. fixed
+     *          1. 브라우저 기준으로 위치르 ㄹ지정
+     *          2. 헤더(메뉴바), 배너 등을 고정시킬 때 활용
+     *      g. sticky
+     *          1. 스크롤과 함꼐 사용하는 경우 많음
+     *          2. 스크롤 내릴 때 메뉴바가 화면 상당에 고정되는 상호아을 구현하고자 할 때 활용
+     *
      *
      */
 }
