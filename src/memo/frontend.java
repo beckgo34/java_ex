@@ -88,5 +88,31 @@ public class frontend {
      *                    <div class="class1">
      *
      *                    </div>
+     *   6. margin(마진),padding(패딩)
+     *      a. 여백을 지정하는 방법
+     *      b. margin
+     *          1. 바깥쪽 여백
+     *          2. 다른요소와의 여백
+     *      c. padding
+     *          1. 안쪽 여백
+     *          2. 테두리를 기준으로 안쪽 여백
+     *      d. 사용 방법
+     *          1. 위(top),아래(bottom),좌(left or start),우(right or end) 여백을 각각 지정하거나
+     *              한번에 지정 할 수 있음
+     *          2. 4방향을 한 번에 적용: 값 하나만 작성
+     *              1. margin: 10px
+     *                  a. 4방향 모두 10px의 마진을 적용
+     *          3. 위아래, 좌우를 각각 적용: 값 두개 작성
+     *              1. margin: 10px 20px
+     *                  a. 위아래 10px, 좌우 20px margin 적용
+     *          4. 위,좌우,아래를 각각 적용: 값 세개 작성
+     *              1. margin: 10px 20px 30px
+     *                  a. 위 10px, 좌우 20px, 아래 30px margin 적용
+     *          5. 4방향을 각각 적용 값 네개 작성
+     *              1. margin: 10px 20px 30px 40px
+     *                  a. 위 10px, 우 20px, 아래 30px, 좌 40px (시계방향)
+     *          6. margin-top, margin-left, magin bottom, margin-right 와 같이 각각을 따로 지정할
+     *             수 있는 속성도 있음
+     *
      */
 }
