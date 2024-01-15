@@ -1348,5 +1348,11 @@ select m.m_no as '후보번호',
 			group by m.m_no, m.m_name
             order by 총투표건수 desc;
 -- 1/9 데이터베이스 끝
+
+--mysql DB계정생성
+create database db_springboot; -- db이름
+create user user_springboot@localhost identified by '1234'; -- 계정이름, 비밀번호 
+grant all privileges on db_springboot.* to user_springboot@localhost; -- 권한부여
+
 */
 }
